@@ -13,8 +13,34 @@ main {
     justify-content: center;
 }
 
-main .products,
-main .payment {
+main table {
+    min-width: 40vw;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+main table th {
+    border-bottom: solid 1px #000;
+}
+
+main table td,
+main table th {
+    padding: 1vh 2vw;
+}
+
+.product .header {
+    text-align: left;
+}
+
+.product .header h2 {
+    font-size: x-large;
+}
+
+.product .header span {
+    font-size: small;
+}
+
+main .products {
     margin: 1rem;
     padding: 1rem;
 }
@@ -27,20 +53,13 @@ main .payment {
     height: max-content;
     min-height: 20vh !important;
     max-height: 50vh;
+    padding: 1vh 2vw;
 
     width: max-content;
-    min-width: 10vw;
+    min-width: 15vw;
 }
 
-.products .product {
-    margin: 3vh 0;
-
-    display: flex;
-    flex-direction: row;
-    gap: 3vw;
-    justify-content: center;
-    align-items: center;
-}
+.products .product {}
 
 .products .product .quantity button {
     min-width: 40px;

@@ -13,6 +13,10 @@ export default class Carrito {
         return this.productos;
     }
 
+    getProductInfo(SKU) {
+        return this.productos.find(p => p.SKU === SKU) ?? null;
+    }
+
     clearUndefinedProducts() {
         this.productos = this.productos.filter(p => typeof p !== "undefined");
     }
@@ -57,7 +61,7 @@ export default class Carrito {
 
             this.lauchEvent(this.defaultsEvents.REMOVE_PRODUCT, producto_actualizado);
 
-            if (producto.quantity > 1) return producto_actualizado;
+            if (producto_actualizado.quantity >= 1) return producto_actualizado;
 
         })
 

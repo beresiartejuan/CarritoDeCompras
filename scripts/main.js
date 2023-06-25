@@ -42,6 +42,43 @@ function setLocalPrice(SKU, callback) {
     local_price.innerHTML = `${result.toFixed(2)} ${CURRENCY}`
 }
 
+function updateProductInList(product) {
+
+    const list = document.querySelector("#list");
+
+    const old_element = document.querySelector(`#list [sku="${product.SKU}"]`);
+
+    const style_numer = "margin-left: .5rem; font-size: 1.1rem";
+
+    if (!old_element) {
+
+        const fragment = document.createDocumentFragment();
+        const p = document.createElement("p");
+
+        p.style = "margin-bottom: 1vh";
+        p.setAttribute("sku", product.SKU);
+        p.innerHTML = `${product.title} <strong style="${style_numer}">x${product.quantity}</strong>`;
+
+        fragment.appendChild(p);
+
+        list.appendChild(fragment);
+
+        return;
+
+    }
+
+    if (product.quantity <= 0) {
+        old_element.remove();
+        return;
+    }
+
+    old_element.innerHTML = `${product.title} <strong style="${style_numer}">x${product.quantity}</strong>`;
+
+
+
+}
+
+
 // Se detecta cuando se agrega un producto al carrito
 carrito.addEventListener(
     eventos_carrito.ADD_PRODUCT,
@@ -49,6 +86,8 @@ carrito.addEventListener(
         // Esto se ejecuta cuando agregas un producto al carrito
         // data es el producto nuevo que se agrego
         console.log(`Se ha agregado un ${producto_nuevo.title} al carrito`);
+
+        updateProductInList(producto_nuevo);
 
         setFinalPrice(final_price => final_price + producto_nuevo.price);
     }
@@ -61,6 +100,10 @@ carrito.addEventListener(
         // Esto se ejecuta cuando agregas un producto al carrito
         // data es el producto nuevo que se agrego
         console.log(`Se ha quitado un ${producto_eliminado.title} del carrito`);
+
+        console.log(producto_eliminado);
+
+        updateProductInList(producto_eliminado);
 
         setFinalPrice(final_price => final_price - producto_eliminado.price);
     }
@@ -99,9 +142,15 @@ function onMinusButtonClick(event) {
 
     const counter = document.querySelector(`[id="${product.SKU}"] [counter]`);
 
+    const new_product = carrito.getProductInfo(product.SKU);
+
+    counter.innerHTML = (new_product) ? new_product.quantity : 0;
+
+    /*
+
     let real_counter = parseInt(counter.innerHTML);
 
-    counter.innerHTML = (real_counter > 0) ? real_counter - 1 : 0;
+    counter.innerHTML = (real_counter > 0) ? real_counter - 1 : 0;*/
 
     setLocalPrice(product.SKU, final_price => final_price - product.price);
 }
@@ -159,7 +208,7 @@ function addProductToDOM(product) {
         
         .#final-price
         
-        .products
+        #products
             #SKU-producto-1
                 .quantity
                 .local_price
@@ -173,7 +222,7 @@ function addProductToDOM(product) {
         <button>+</button>
     */
 
-    const productElement = document.createElement("section");
+    const productElement = document.createElement("tr");
 
     const fragment = document.createDocumentFragment();
 
@@ -182,17 +231,17 @@ function addProductToDOM(product) {
     productElement.setAttribute("id", product.SKU || "");
 
     productElement.innerHTML = `
-    <div class="header">
+    <td class="header">
         <h2>${product.title}</h2>
         <span>Ref: ${product.SKU}</span>
-    </div>
-    <div class="quantity"></div>
-    <div class="price">
+    </td>
+    <td class="quantity"></td>
+    <td class="price">
         <span>${product.price} ${CURRENCY}</span>
-    </div>
-    <div>
+    </td>
+    <td>
         <span class="local_price">0 ${CURRENCY}</span>
-    </div>`;
+    </td>`;
 
     fragment.appendChild(productElement);
 
