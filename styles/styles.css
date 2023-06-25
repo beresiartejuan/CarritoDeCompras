@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    margin-top: 10vh;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+}
+
+main .products,
+main .payment {
+    margin: 1rem;
+    padding: 1rem;
+}
+
+main .payment hr {
+    margin: 1vh 0;
+}
+
+main .payment {
+    height: max-content;
+    min-height: 20vh !important;
+    max-height: 50vh;
+
+    width: max-content;
+    min-width: 10vw;
+}
+
+.products .product {
+    margin: 3vh 0;
+
+    display: flex;
+    flex-direction: row;
+    gap: 3vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.products .product .quantity button {
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.products .product .quantity span {
+    margin: 0 .5rem;
+}
