@@ -152,6 +152,27 @@ function addButtonsToProductField(sku) {
 
 function addProductToDOM(product) {
 
+    /*
+        Esta función genera la estructura del producto
+        Se puede editar sin problemas, pero se debe mantener la siguiente estructura para
+        que el js pueda continuar funcionando:
+        
+        .#final-price
+        
+        .products
+            #SKU-producto-1
+                .quantity
+                .local_price
+            #SKU-producto-2
+            ...etc
+
+        En el elemento que quenga la clase quantity se agregará la siguiente estructura
+
+        <button>-</button>
+        <span>CONTADOR SIMBOLO_MONEDA</span>
+        <button>+</button>
+    */
+
     const productElement = document.createElement("section");
 
     const fragment = document.createDocumentFragment();
