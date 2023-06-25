@@ -240,7 +240,7 @@ function addProductToDOM(product) {
         <span>${product.price} ${CURRENCY}</span>
     </td>
     <td>
-        <span class="local_price">0 ${CURRENCY}</span>
+        <span class="local_price">0.00 ${CURRENCY}</span>
     </td>`;
 
     fragment.appendChild(productElement);

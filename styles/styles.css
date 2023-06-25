@@ -21,6 +21,7 @@ main table {
 
 main table th {
     border-bottom: solid 1px #000;
+    font-size: x-large;
 }
 
 main table td,
