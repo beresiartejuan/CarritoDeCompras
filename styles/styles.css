@@ -65,6 +65,9 @@ main .payment {
 .products .product .quantity button {
     min-width: 40px;
     min-height: 40px;
+    background-color: transparent;
+    border: 2px solid #252424;
+    border-radius: 5px;
 }
 
 .products .product .quantity span {
